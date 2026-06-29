@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TBIP + NOMINATE · Visualizadores temáticos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F3F5F5;
+      --bg-white: #FFFFFF;
+      --text: #1B1C1E;
+      --text-2: #657D81;
+      --border: rgba(101, 125, 129, 0.20);
+      --border-light: rgba(101, 125, 129, 0.10);
+      --c22-green: #4CCAA5;
+      --c22-slate: #768D93;
+      --c22-yellow: #FFB923;
+      --c22-red: #F20231;
+      --c22-purple: #A10856;
+      --c22-cyan: #53C5D8;
+      --dark: #2B2B2B;
+      --dm: 'DM Sans', sans-serif;
+      --mont: 'Montserrat', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mont);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    .top-ribbon {
+      height: 6px;
+      background: linear-gradient(to right, var(--c22-green) 0%, var(--c22-green) 20%, var(--c22-yellow) 20%, var(--c22-yellow) 40%, var(--c22-red) 40%, var(--c22-red) 60%, var(--c22-purple) 60%, var(--c22-purple) 80%, var(--c22-cyan) 80%, var(--c22-cyan) 100%);
+    }
+    .site-header {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 7%;
+    }
+    .header-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+    }
+    .brand-c22 img {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+    .brand-cep img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+    .brand-subtitle {
+      font-family: var(--mont);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-2);
+      line-height: 1.4;
+      max-width: 320px;
+    }
+    .brand-fallback {
+      font-family: var(--dm);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--text);
+    }
+    .main-nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .main-nav a {
+      font-family: var(--mont);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--text-2);
+    }
+    .main-nav a:hover { color: var(--text); }
+    .hero {
+      background: var(--bg);
+      padding: 72px 7% 42px;
+    }
+    .hero-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--mont);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--c22-green);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: var(--dm);
+      font-size: clamp(40px, 4.6vw, 66px);
+      line-height: 1.02;
+      letter-spacing: -1.6px;
+      color: var(--text);
+      max-width: 1080px;
+      margin: 0 0 26px;
+    }
+    .hero h1 span { display: block; }
+    .hero p.lead {
+      font-family: var(--mont);
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--text-2);
+      max-width: 980px;
+      margin: 0;
+    }
+    .hero-cta {
+      display: inline-flex;
+      margin-top: 28px;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mont);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text);
+      border-bottom: 2px solid var(--c22-green);
+      padding-bottom: 5px;
+    }
+    .hero-cta span { color: var(--c22-green); font-size: 17px; }
+    .stats-strip {
+      background: var(--dark);
+      color: #fff;
+      padding: 28px 7%;
+    }
+    .stats-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat {
+      padding: 0 30px;
+      border-left: 1px solid rgba(255,255,255,.12);
+    }
+    .stat:first-child {
+      border-left: none;
+      padding-left: 0;
+    }
+    .stat-number {
+      font-family: var(--dm);
+      font-size: 46px;
+      font-weight: 700;
+      line-height: .9;
+    }
+    .stat-label {
+      margin-top: 10px;
+      font-family: var(--mont);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: rgba(255,255,255,.65);
+      line-height: 1.5;
+    }
+    .visualizers {
+      padding: 46px 7% 72px;
+    }
+    .section-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+    .section-head h2 {
+      font-family: var(--dm);
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1;
+      letter-spacing: -1.4px;
+      margin: 0;
+      color: var(--text);
+    }
+    .section-head p {
+      font-family: var(--mont);
+      color: var(--text-2);
+      font-size: 15px;
+      line-height: 1.75;
+      margin: 14px 0 0;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .topic-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 366px;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(27,28,30,.08);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    }
+    .card-topline {
+      height: 4px;
+      background: var(--accent);
+    }
+    .card-preview {
+      height: 150px;
+      position: relative;
+      background: linear-gradient(135deg, #fbfcfc, #f0f4f4);
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+    .card-preview svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .card-body {
+      padding: 26px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+    .topic-card h3 {
+      font-family: var(--dm);
+      font-size: 31px;
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      margin: 0;
+    }
+    .topic-card p {
+      font-family: var(--mont);
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-2);
+      margin: 0;
+      flex: 1;
+    }
+    .card-cta {
+      font-family: var(--mont);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+    .reading {
+      background: #fff;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 54px 7%;
+    }
+    .reading-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(220px, .35fr) minmax(0, .65fr);
+      gap: 52px;
+    }
+    .reading h2 {
+      font-family: var(--dm);
+      font-size: clamp(32px, 4vw, 50px);
+      letter-spacing: -1.4px;
+      line-height: 1;
+      margin: 0;
+    }
+    .reading p {
+      margin: 0;
+      font-family: var(--mont);
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .reading .note {
+      margin-top: 14px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .site-footer {
+      position: relative;
+      background: #2F2F31;
+      color: rgba(255,255,255,.82);
+      padding: 58px 7% 0;
+      overflow: hidden;
+    }
+    .footer-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr 1fr;
+      gap: 42px;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-logos {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .footer-logos img:first-child {
+      height: 60px;
+      width: auto;
+    }
+    .footer-logos img:last-child {
+      height: 34px;
+      width: auto;
+    }
+    .footer-kicker {
+      font-family: var(--mont);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: rgba(255,255,255,.65);
+      margin: 0 0 10px;
+    }
+    .footer-project,
+    .footer-year {
+      font-family: var(--mont);
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.72);
+      margin: 0;
+    }
+    .footer-col h4 {
+      font-family: var(--mont);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(135, 170, 177, .45);
+    }
+    .footer-col a {
+      display: block;
+      font-family: var(--mont);
+      font-size: 13px;
+      line-height: 2.05;
+      color: rgba(255,255,255,.74);
+    }
+    .footer-col a:hover { color: var(--c22-green); }
+    .footer-mark {
+      position: absolute;
+      right: 24px;
+      bottom: 56px;
+      font-family: var(--dm);
+      font-size: 180px;
+      font-weight: 800;
+      color: rgba(255,255,255,.06);
+      line-height: .8;
+      pointer-events: none;
+    }
+    .footer-bottom {
+      max-width: 1380px;
+      margin: 26px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-family: var(--mont);
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.48);
+      position: relative;
+      z-index: 2;
+    }
+    .footer-ribbon {
+      height: 8px;
+      margin: 18px -7% 0;
+      background: linear-gradient(to right, rgba(120,145,150,.85) 0%, rgba(120,145,150,.85) 20%, var(--c22-green) 20%, var(--c22-green) 40%, var(--c22-yellow) 40%, var(--c22-yellow) 60%, var(--c22-red) 60%, var(--c22-red) 80%, var(--c22-purple) 80%, var(--c22-purple) 100%);
+    }
+    @media (max-width: 1280px) {
+      .cards-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 980px) {
+      .header-inner, .brand-wrap { align-items: flex-start; flex-direction: column; }
+      .main-nav { flex-wrap: wrap; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .reading-inner { grid-template-columns: 1fr; gap: 18px; }
+    }
+    @media (max-width: 860px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .site-header, .hero, .stats-strip, .visualizers, .reading, .site-footer { padding-left: 5%; padding-right: 5%; }
+      .brand-c22 img { height: 52px; }
+      .brand-cep img { height: 32px; }
+      .main-nav { display: none; }
+      .hero { padding-top: 58px; }
+      .hero h1 { font-size: clamp(42px, 14vw, 58px); }
+      .cards-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(3) { border-left: none; }
+    }
+    @media (max-width: 480px) {
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat {
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,.12);
+        padding: 18px 0;
+      }
+      .stat:first-child { border-top: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-ribbon c22-top-ribbon"></div>
+  <header class="site-header c22-site-header">
+    <div class="header-inner c22-header-inner">
+      <div class="brand-wrap c22-brand-wrap">
+        <a class="brand-c22" href="https://c22cepchile.cl" target="_blank" rel="noopener">
+          <img src="https://static.cepchile.cl/uploads/c22/2021/09/logo-color.svg" alt="C22" onerror="this.outerHTML='<span class=&quot;brand-fallback&quot;>C22</span>'">
+        </a>
+        <a class="brand-cep" href="https://www.cepchile.cl" target="_blank" rel="noopener">
+          <img src="https://static.cepchile.cl/uploads/c22/2021/09/logo-cep-color.svg" alt="Centro de Estudios Públicos" onerror="this.outerHTML='<span class=&quot;brand-fallback&quot;>CEP</span>'">
+        </a>
+        <div class="brand-subtitle">Métodos digitales / Cámara de Diputadas y Diputados</div>
+      </div>
+      <nav class="main-nav c22-main-nav" aria-label="Navegación principal">
+        <a href="#visualizadores">Visualizadores</a>
+        <a href="#lectura">Cómo leer</a>
+        <a href="https://c22cepchile.cl" target="_blank" rel="noopener">C22 CEP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats-strip" aria-label="Métricas generales">
+      <div class="stats-inner">
+        <div class="stat"><div class="stat-number">5</div><div class="stat-label">temas legislativos</div></div>
+        <div class="stat"><div class="stat-number">390</div><div class="stat-label">parlamentarios comparados</div></div>
+        <div class="stat"><div class="stat-number">1.771</div><div class="stat-label">votaciones temáticas</div></div>
+        <div class="stat"><div class="stat-number">5</div><div class="stat-label">modelos discursivos TBIP</div></div>
+      </div>
+    </section>
+
+
+    </section>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">ANALIZA</div>
+    <h1>
+      Discurso y voto en la Cámara.
+    </h1>
+       <p class="lead">
+    Cinco visualizadores interactivos para explorar cómo se relacionan las intervenciones parlamentarias
+
+  y las votaciones nominales en distintos temas de la Cámara de Diputadas y Diputados.  Cada visualizador permite observar, si quienes hablan parecido también votan de forma parecida en ese mismo ámbito, comparando posiciones construidas desde el discurso parlamentario y desde los patrones de votación dentro de un mismo ámbito temático.  Los resultados muestran posiciones relativas dentro de modelos estadísticos.
+</p>
+        <a class="hero-cta" href="#visualizadores">Explorar visualizadores <span>→</span></a>
+      </div>
+    </section>
+
+
+    <section class="visualizers" id="visualizadores">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Visualizadores temáticos.</h2>
+          <p>Cinco entradas independientes para explorar la relación entre intervenciones parlamentarias y votaciones temáticas en la Cámara.</p>
+        </div>
+        <div class="cards-grid">
+          
+      <a class="topic-card" href="seguridad_tbip_nominate.html" style="--accent:var(--c22-red)" aria-label="Abrir visualizador de Seguridad pública">
+        <div class="card-topline"></div>
+        <div class="card-preview preview-seguridad" aria-hidden="true">
+          
+          <svg viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Preview abstracto">
+            <defs><pattern id="grid-security" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0 L0 0 0 24" fill="none" stroke="rgba(101,125,129,.10)" stroke-width="1"/></pattern></defs>
+            <rect width="320" height="150" fill="#F3F5F5"/>
+            <rect width="320" height="150" fill="url(#grid-security)"/>
+            <path d="M38 112 C86 78 126 96 176 68 S248 50 288 38 L288 118 L38 118 Z" fill="var(--accent)" opacity=".08"/>
+            <line x1="32" y1="92" x2="288" y2="92" stroke="rgba(101,125,129,.35)" stroke-width="1"/>
+            <path d="M44 108 C95 82 136 91 180 70 S242 52 284 42" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="86" cy="89" r="6" fill="var(--accent)"/>
+            <circle cx="152" cy="76" r="6" fill="var(--accent)"/>
+            <circle cx="236" cy="57" r="6" fill="var(--accent)"/>
+            <circle cx="236" cy="57" r="13" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".45"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Seguridad pública</h3>
+          <p>Explora cómo se conectan los discursos sobre seguridad, orden público, delitos, policías y justicia penal con las votaciones del mismo ámbito.</p>
+          <div class="card-cta">Abrir visualizador <span>→</span></div>
+        </div>
+      </a>
+    
+
+      <a class="topic-card" href="trabajo_tbip_nominate.html" style="--accent:var(--c22-green)" aria-label="Abrir visualizador de Trabajo y empleo">
+        <div class="card-topline"></div>
+        <div class="card-preview preview-trabajo" aria-hidden="true">
+          
+          <svg viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Preview abstracto">
+            <defs><pattern id="grid-work" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0 L0 0 0 28" fill="none" stroke="rgba(101,125,129,.09)" stroke-width="1"/></pattern></defs>
+            <rect width="320" height="150" fill="#F3F5F5"/>
+            <rect width="320" height="150" fill="url(#grid-work)"/>
+            <line x1="36" y1="112" x2="284" y2="112" stroke="rgba(101,125,129,.32)" stroke-width="1"/>
+            <path d="M64 112 V82 M104 112 V64 M144 112 V90 M184 112 V58 M224 112 V76 M264 112 V48" stroke="var(--accent)" stroke-width="8" stroke-linecap="round" opacity=".78"/>
+            <path d="M64 82 C92 64 114 60 144 90 S194 62 224 76 S246 58 264 48" fill="none" stroke="#1B1C1E" stroke-opacity=".38" stroke-width="2.4"/>
+            <circle cx="104" cy="64" r="5" fill="var(--accent)"/>
+            <circle cx="184" cy="58" r="5" fill="var(--accent)"/>
+            <circle cx="264" cy="48" r="5" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Trabajo y empleo</h3>
+          <p>Observa la relación entre intervenciones sobre empleo, derechos laborales, condiciones de trabajo y votaciones laborales.</p>
+          <div class="card-cta">Abrir visualizador <span>→</span></div>
+        </div>
+      </a>
+    
+
+      <a class="topic-card" href="salud_tbip_nominate.html" style="--accent:var(--c22-cyan)" aria-label="Abrir visualizador de Sistema de salud">
+        <div class="card-topline"></div>
+        <div class="card-preview preview-salud" aria-hidden="true">
+          
+          <svg viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Preview abstracto">
+            <defs><pattern id="grid-health" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0 L0 0 0 26" fill="none" stroke="rgba(101,125,129,.09)" stroke-width="1"/></pattern></defs>
+            <rect width="320" height="150" fill="#F3F5F5"/>
+            <rect width="320" height="150" fill="url(#grid-health)"/>
+            <path d="M150 34 H178 V62 H206 V90 H178 V118 H150 V90 H122 V62 H150 Z" fill="var(--accent)" opacity=".12"/>
+            <path d="M44 102 C86 72 116 108 154 76 S224 54 278 84" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            <rect x="48" y="42" width="72" height="5" rx="2.5" fill="rgba(101,125,129,.25)"/>
+            <rect x="48" y="58" width="94" height="5" rx="2.5" fill="rgba(101,125,129,.18)"/>
+            <rect x="48" y="74" width="56" height="5" rx="2.5" fill="rgba(101,125,129,.22)"/>
+            <circle cx="92" cy="76" r="5" fill="var(--accent)"/>
+            <circle cx="154" cy="76" r="5" fill="var(--accent)"/>
+            <circle cx="236" cy="62" r="5" fill="var(--accent)"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Sistema de salud</h3>
+          <p>Revisa cómo se relacionan los discursos sobre listas de espera, hospitales, Fonasa e isapres con las votaciones de salud.</p>
+          <div class="card-cta">Abrir visualizador <span>→</span></div>
+        </div>
+      </a>
+    
+
+      <a class="topic-card" href="educacion_tbip_nominate.html" style="--accent:var(--c22-yellow)" aria-label="Abrir visualizador de Educación">
+        <div class="card-topline"></div>
+        <div class="card-preview preview-educacion" aria-hidden="true">
+          
+          <svg viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Preview abstracto">
+            <defs><pattern id="grid-education" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0 L0 0 0 30" fill="none" stroke="rgba(101,125,129,.08)" stroke-width="1"/></pattern></defs>
+            <rect width="320" height="150" fill="#F3F5F5"/>
+            <rect width="320" height="150" fill="url(#grid-education)"/>
+            <path d="M48 46 H142 M48 66 H132 M48 86 H152 M178 46 H274 M178 66 H258 M178 86 H286" stroke="rgba(101,125,129,.32)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="42" y1="116" x2="286" y2="116" stroke="rgba(101,125,129,.26)" stroke-width="1"/>
+            <path d="M50 104 C92 88 116 96 154 76 S222 54 280 64" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="92" cy="91" r="5" fill="var(--accent)"/>
+            <circle cx="154" cy="76" r="5" fill="var(--accent)"/>
+            <circle cx="238" cy="59" r="5" fill="var(--accent)"/>
+            <circle cx="154" cy="76" r="14" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".30"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Educación</h3>
+          <p>Compara intervenciones y votaciones sobre educación escolar, superior, financiamiento e institucionalidad educativa.</p>
+          <div class="card-cta">Abrir visualizador <span>→</span></div>
+        </div>
+      </a>
+    
+
+      <a class="topic-card" href="economia_tbip_nominate.html" style="--accent:var(--c22-purple)" aria-label="Abrir visualizador de Economía y presupuesto">
+        <div class="card-topline"></div>
+        <div class="card-preview preview-economia" aria-hidden="true">
+          
+          <svg viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Preview abstracto">
+            <defs><pattern id="grid-economy" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0 L0 0 0 24" fill="none" stroke="rgba(101,125,129,.09)" stroke-width="1"/></pattern></defs>
+            <rect width="320" height="150" fill="#F3F5F5"/>
+            <rect width="320" height="150" fill="url(#grid-economy)"/>
+            <line x1="40" y1="116" x2="284" y2="116" stroke="rgba(101,125,129,.30)" stroke-width="1"/>
+            <path d="M58 116 V82 M102 116 V58 M146 116 V90 M190 116 V48 M234 116 V70 M278 116 V40" stroke="var(--accent)" stroke-width="14" stroke-linecap="round" opacity=".74"/>
+            <path d="M52 96 C92 62 116 72 148 82 C184 93 210 48 278 42" fill="none" stroke="#1B1C1E" stroke-opacity=".42" stroke-width="3"/>
+            <circle cx="52" cy="96" r="5" fill="#fff" stroke="var(--accent)" stroke-width="3"/>
+            <circle cx="148" cy="82" r="5" fill="#fff" stroke="var(--accent)" stroke-width="3"/>
+            <circle cx="278" cy="42" r="5" fill="#fff" stroke="var(--accent)" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Economía y presupuesto</h3>
+          <p>Analiza discursos y votaciones sobre presupuesto, impuestos, crecimiento, inversión, empresas y sectores productivos.</p>
+          <div class="card-cta">Abrir visualizador <span>→</span></div>
+        </div>
+      </a>
+    
+        </div>
+      </div>
+    </section>
+
+
+  <footer class="site-footer c22-site-footer">
+    <div class="footer-inner c22-footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logos">
+          <img src="https://static.cepchile.cl/uploads/c22/2021/09/logo-color.svg" alt="C22">
+          <img src="https://static.cepchile.cl/uploads/c22/2021/09/logo-cep-color.svg" alt="CEP">
+        </div>
+        <p class="footer-kicker">C22 · Centro de Estudios Públicos</p>
+        <p class="footer-project">Visualizadores TBIP + NOMINATE — Cámara de Diputadas y Diputados</p>
+        <p class="footer-year">2026</p>
+      </div>
+      <div class="footer-col">
+        <h4>Visualizadores</h4>
+        <a href="seguridad_tbip_nominate.html">Seguridad</a>
+        <a href="trabajo_tbip_nominate.html">Trabajo</a>
+        <a href="salud_tbip_nominate.html">Salud</a>
+        <a href="educacion_tbip_nominate.html">Educación</a>
+        <a href="economia_tbip_nominate.html">Economía</a>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="#visualizadores">Visualizadores</a>
+        <a href="#lectura">Cómo leer</a>
+        <a href="https://c22cepchile.cl" target="_blank" rel="noopener">C22 CEP</a>
+      </div>
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <a href="https://www.cepchile.cl" target="_blank" rel="noopener">Centro de Estudios Públicos</a>
+        <a href="https://c22cepchile.cl" target="_blank" rel="noopener">C22 CEP</a>
+        <a href="https://opendata.congreso.cl" target="_blank" rel="noopener">Datos abiertos del Congreso</a>
+      </div>
+    </div>
+    <div class="footer-mark" aria-hidden="true">C22</div>
+    <div class="footer-bottom">2026 · C22 · Centro de Estudios Públicos</div>
+    <div class="footer-ribbon"></div>
+  </footer>
+</body>
+</html>

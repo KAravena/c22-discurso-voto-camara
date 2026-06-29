@@ -1,0 +1,33 @@
+{
+  "theme": "seguridad",
+  "template_path": "D:\\CEP\\Mar - intervenciones\\Nominate\\seguridad_tbip_nominate_template.html",
+  "metrics": {
+    "n_tbip": 88,
+    "n_nominate": 157,
+    "n_matched": 88,
+    "n_unmatched_tbip": 0,
+    "n_unmatched_nominate": 69,
+    "n_topics": 6,
+    "n_documents": 2320,
+    "n_votaciones": 142,
+    "n_pactos": 9,
+    "pearson_r": 0.630633,
+    "spearman_r": 0.580997
+  },
+  "correlations": {
+    "pearson_tbip_nominate": 0.630633,
+    "spearman_tbip_nominate": 0.580997,
+    "pearson_tbip_general": 0.616777,
+    "spearman_tbip_general": 0.639534,
+    "pearson_nominate_general": 0.93499,
+    "spearman_nominate_general": 0.870605
+  },
+  "divergence_thresholds": {
+    "t1": 0.345522,
+    "t2": 0.802491
+  },
+  "warnings": [
+    "Archivo faltante: D:\\CEP\\Mar - intervenciones\\Nominate\\seguridad\\nominate_seguridad\\comparacion_tbip\\casos_cualitativos_divergentes_seguridad.md",
+    "Archivo faltante: D:\\CEP\\Mar - intervenciones\\Nominate\\seguridad\\nominate_seguridad\\comparacion_tbip\\intervenciones_extremas_casos_divergentes_seguridad.csv"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "theme": "educacion",
+  "template_path": "D:\\CEP\\Mar - intervenciones\\Nominate\\seguridad_tbip_nominate_template.html",
+  "metrics": {
+    "n_tbip": 106,
+    "n_nominate": 241,
+    "n_matched": 106,
+    "n_unmatched_tbip": 0,
+    "n_unmatched_nominate": 135,
+    "n_topics": 8,
+    "n_documents": 2006,
+    "n_votaciones": 448,
+    "n_pactos": 10,
+    "pearson_r": 0.672741,
+    "spearman_r": 0.666484
+  },
+  "correlations": {
+    "pearson_tbip_nominate": 0.672741,
+    "spearman_tbip_nominate": 0.666484,
+    "pearson_tbip_general": 0.691578,
+    "spearman_tbip_general": 0.70037,
+    "pearson_nominate_general": 0.973762,
+    "spearman_nominate_general": 0.963665
+  },
+  "divergence_thresholds": {
+    "t1": 0.309853,
+    "t2": 0.734424
+  },
+  "warnings": []
+}
